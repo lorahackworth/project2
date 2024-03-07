@@ -6,35 +6,34 @@ public class Main {
     public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ArrayList<Task> myTasks = new ArrayList<>();
+        try {
+            ArrayList<Task> myTasks = new ArrayList<>();
 
-        //starts the loop by allowing user to make a first choice
+            //starts the loop by allowing user to make a first choice
+            System.out.println();
+            System.out.println("Please choose an option: \n(1)Add a task. \n(2)Remove a task. \n(3)Update a task. \n(4)List all tasks. \n(0)Exit.");
+            String userChoice = input.nextLine();
 
-        System.out.println();
-        System.out.println("Please choose an option: \n(1)Add a task. \n(2)Remove a task. \n(3)Update a task. \n(4)List all tasks. \n(0)Exit.");
-        String userChoice = input.nextLine();
-
-        // starts loop to continue as long as user choice doesn't equal 0
-        while (!(userChoice.equals("0"))) {
-            //user choices, at the beginning of the loop so it shows up before prompting another response
-            if (userChoice.equals("1")) {
-                addTask(myTasks);
+            // starts loop to continue as long as user choice doesn't equal 0
+            while (!(userChoice.equals("0"))) {
+                //user choices, at the beginning of the loop so it shows up before prompting another response
+                if (userChoice.equals("1"))
+                    addTask(myTasks);
+                if (userChoice.equals("2"))
+                    removeTask(myTasks);
+                if (userChoice.equals("3"))
+                    updateTask(myTasks);
+                if (userChoice.equals("4"))
+                    viewTasks(myTasks);
+                System.out.println("\nPlease choose an option: \n(1)Add a task. \n(2)Remove a task. \n(3)Update a task. \n(4)List all tasks. \n(0)Exit.");
+                userChoice = input.nextLine();
             }
-            if (userChoice.equals("2")) {
-                removeTask(myTasks);
-            }
-            if (userChoice.equals("3")) {
-                updateTask(myTasks);
-            }
-            if (userChoice.equals("4")) {
-                viewTasks(myTasks);
-            }
-            System.out.println("\nPlease choose an option: \n(1)Add a task. \n(2)Remove a task. \n(3)Update a task. \n(4)List all tasks. \n(0)Exit.");
-            userChoice = input.nextLine();
+            //goodbye message :)
+            if (userChoice.equals("0"))
+                System.out.println("\n~ Goodbye! ~");
+        }catch(Exception e){
+            System.out.println(e);
         }
-        //goodbye message :)
-        if (userChoice.equals("0"))
-            System.out.println("\n~ Goodbye! ~");
     }
 
     static void addTask(ArrayList<Task> a) {
@@ -63,6 +62,7 @@ public class Main {
             System.out.println("\nTask Number: " + i + a.get(i));
         }
         int taskToRemove = input.nextInt();
+        input.nextLine();
         a.remove(taskToRemove);
     }
 
@@ -91,7 +91,6 @@ public class Main {
         Task newTask = new Task(taskName, taskDescription, taskPriority);
         a.set(updateTask, newTask);
 
-
         System.out.println("\nYour updated tasks...");
         for (int i = 0; i < a.size(); i++) {
             System.out.println("\nTask Number: " + i + a.get(i));
@@ -119,7 +118,6 @@ public class Main {
                 input.nextLine();
             }
         }
-
         //displays tasks
         for (int i = 0; i < a.size(); i++) {
             Task currentTask = a.get(i);
