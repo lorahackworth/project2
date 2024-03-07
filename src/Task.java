@@ -31,9 +31,11 @@ public class Task {
     public void setPriority(int priority) {
         this.priority = priority;
     }
-    public void display(Task a){
-        System.out.println(a.getName());
+
+    @Override
+    public String toString() {
+        return "\nTask: " + this.getName() +
+                "\nDescription: " + this.getDescription() +
+                "\nPriority: " + this.getPriority();
     }
-
-
 }
